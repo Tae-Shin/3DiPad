@@ -16,12 +16,8 @@ public class FaceTracking : MonoBehaviour
     private FaceManager faceManager;
     public Controller Lx, Ly, Lz, Rx, Ry, Rz;
 
-    // 2025/08/30 追加
-    public Controller OnDotNum;
-    public Controller MratioY;
-
-    // 2025/10/06 追加
-    public Controller_a MratioX;
+    // 傾斜誤差
+    public Controller Phi;
 
     private void Start()
     {
@@ -47,13 +43,7 @@ public class FaceTracking : MonoBehaviour
         Shader.SetGlobalFloat("_Origin", origin.value);
         Shader.SetGlobalFloat("_Parallax", parallax.value);
 
-        // 2025/08/30 追加
-        Shader.SetGlobalFloat("_dotNum", OnDotNum.value);
-        // とりあえずScreenOrientaitonは無視
-        Shader.SetGlobalFloat("_MRatio_X", MratioX.value);
-        Debug.Log("MratioX: "+  MratioX.value);
-        Shader.SetGlobalFloat("_M", 3.0f * MratioY.value * (-1) / MratioX.value);
-        Debug.Log("_M: "+  3.0f * MratioY.value * (-1) / MratioX.value);
+        Shader.SetGlobalFloat("_Phi", Phi.value);
     }
     //カメラ座標系をディスプレイ座標に変換（左下原点：単位[px]）
     Vector2 CameraToDisplay(Vector3 cameraPos)

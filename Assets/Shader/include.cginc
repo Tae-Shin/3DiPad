@@ -1,4 +1,3 @@
-//スタートピクセル[px]
 float _Origin;
 
 //適視距離[mm]
@@ -6,6 +5,9 @@ float _OVD;
 
 //ドット領域幅[mm]
 float _F;
+
+//眼間距離[mm]
+float _E;
 
 //ディスプレイ解像度[px x px]
 float2 _DisplayResolution;

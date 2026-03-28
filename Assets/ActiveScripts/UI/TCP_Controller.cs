@@ -8,7 +8,7 @@ using Shapes2D;
 using System.Threading;
 using TMPro;
 using PimDeWitte.UnityMainThreadDispatcher;
-public class TCPClient : MonoBehaviour
+public class TCP_Controller : MonoBehaviour
 {
     // TCP
     public string serverIP = "192.168.1.1";
@@ -56,17 +56,13 @@ public class TCPClient : MonoBehaviour
     public TMP_InputField Origin;
     public Slider Ori_slider;
     public Toggle Ori_Int;
-    public TMP_InputField OnDotNum;
-    public Slider OnDotNum_slider;
-    public Toggle OnDotNum_Int;
-    // 傾き
-    public TMP_InputField MRatioX;
-    public Slider MRatioX_slider;
-    public Toggle MRatioX_Int;
-    public TMP_InputField MRatioY;
-    public Slider MRatioY_slider;
-    public Toggle MRatioY_Int;
+    
     public GameObject UI;
+
+    [Header("Phi Calibration")]
+    public TMP_InputField Phi;
+    public Slider Phi_slider;
+    public Toggle Phi_Int;
     void Start()
     {
         connectButton.onClick.AddListener(OnConnectButtonPressed);
@@ -161,9 +157,8 @@ public class TCPClient : MonoBehaviour
                             safe(Picture.text) + "/" + (Pic_Int.isOn ? "1" : "0") + "/" +
                             safe(Material.text) + "/" + (Mat_Int.isOn ? "1" : "0") + "/" +
                             safe(Origin.text) + "/" + (Ori_Int.isOn ? "1" : "0") + "/" +
-                            safe(OnDotNum.text) + "/" + (OnDotNum_Int.isOn ? "1" : "0") + "/" +
-                            safe(MRatioX.text) + "/" + (MRatioX_Int.isOn ? "1" : "0") + "/" +
-                            safe(MRatioY.text) + "/" + (MRatioY_Int.isOn ? "1" : "0") + "/\n";
+                            safe(Phi.text) + "/" + (Phi_Int.isOn ? "1" : "0") + "/" +
+                            "\n";
                         Debug.Log("送信内容: " + message);
                         SendMessageToServer(message);
                     }
@@ -239,7 +234,7 @@ public class TCPClient : MonoBehaviour
     private void ProcessIncomingParams(string received)
     {
         string[] tokens = received.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-        if (tokens.Length >= 25 && tokens[0] == "current")
+        if (tokens.Length >= 22 && tokens[0] == "current")
         {
             // Debug.Log("受信パラメータ数: " + tokens.Length);
             // 受信した値でUIを更新
@@ -254,8 +249,6 @@ public class TCPClient : MonoBehaviour
             // Debug.Log($"Mat = {tokens[15]}, Mat_Int = {tokens[16]}");
             // Debug.Log($"Ori = {tokens[17]}, Ori_Int = {tokens[18]}");
             // Debug.Log($"OnDotNum = {tokens[19]}, OnDotNums_Int = {tokens[20]}");
-            // Debug.Log($"MRatioX = {tokens[21]}, MRatioX_Int = {tokens[22]}");
-            // Debug.Log($"MRatioY = {tokens[23]}, MRatioY_Int = {tokens[24]}");
             // UI更新したい場合は Unity のメインスレッドで実行する必要がある
             UnityMainThreadDispatcher.Instance().Enqueue(() =>
             {
@@ -277,13 +270,9 @@ public class TCPClient : MonoBehaviour
                 Mat_Int.isOn = tokens[16] == "1";
                 Ori_slider.value = float.Parse(tokens[17]);
                 Ori_Int.isOn = tokens[18] == "1";
-                OnDotNum_slider.value = float.Parse(tokens[19]);
-                OnDotNum_Int.isOn = tokens[20] == "1";
-                MRatioX_slider.value = float.Parse(tokens[21]);
-                MRatioX_Int.isOn = tokens[22] == "1";
-                MRatioY_slider.value = float.Parse(tokens[23]);
-                MRatioY_Int.isOn = tokens[24] == "1";
-                UI.SetActive(tokens[25] == "1");
+                Phi_slider.value = float.Parse(tokens[19]);
+                Phi_Int.isOn = tokens[20] == "1";
+                UI.SetActive(tokens[21] == "1");
             });
         }
         else

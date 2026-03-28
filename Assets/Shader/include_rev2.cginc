@@ -18,25 +18,33 @@ float _M;
 int2 _MRatio;
 
 //パターン数
-int _PatternNum;
+float _PatternNum;
+
+int _IsSBS;
 
 //ディスプレイの向き
 int _ScreenOrientation;
 
+float _BarrierPitch;
+float _ApertureRatio;
 float _PixelPitch;
+float2 _Size;
 float _Gap;
 float _N;
 int _RefractionFlag;
 int _MarkerFlag;
 int _Reversal;
 float _Origin;
+
+// 傾斜誤差
+float _Phi;
+
+
 //画像切替用の変数
 sampler2D _LTex;//左眼画像
 sampler2D _RTex;//右眼画像
 float4 _LTex_ST;
 float4 _RTex_ST;
-
-int _Draw;
 
 void Swap(inout float a, inout float b)
 {

@@ -1,4 +1,4 @@
-Shader "Unlit/Mashitani_NoEyeTracking"
+Shader "Unlit/StripePattern_v1"
 {
     Properties
     {
@@ -18,7 +18,6 @@ Shader "Unlit/Mashitani_NoEyeTracking"
             #pragma multi_compile_fog
 
             #include "UnityCG.cginc"
-            #include "include_ma_rev3.cginc"
 
             struct appdata
             {
@@ -45,32 +44,13 @@ Shader "Unlit/Mashitani_NoEyeTracking"
                 return o;
             }
 
-            float4 ParallaxImage(subpixel sp, float2 uv, float leftImage, float rightImage)
-            {
-                // R : 0 ~ 4
-                if (0 <= sp.num && sp.num < 4){
-                    return rightImage;
-                }
-                // L : 4 ~ 8
-                else {
-                    return leftImage;
-                }
-            }
-
             fixed4 frag (v2f i) : SV_Target
             {
-                // LR 初期化
-                float4 leftImage = tex2D(_LTex, i.uv);
-	            float4 rightImage = tex2D(_RTex, i.uv);
-
-                // rgba 初期化
-                float4 rgba = float4(0, 0, 0, 1);
-
-                pixel p = ma_InitPixel(i.uv * _DisplayResolution);
-                rgba.r = ParallaxImage(p.r, i.uv, leftImage.r, rightImage.r);
-                rgba.g = ParallaxImage(p.g, i.uv, leftImage.g, rightImage.g);
-                rgba.b = ParallaxImage(p.b, i.uv, leftImage.b, rightImage.b);
-                return rgba;
+                // sample the texture
+                fixed4 col = tex2D(_MainTex, i.uv);
+                // apply fog
+                UNITY_APPLY_FOG(i.fogCoord, col);
+                return col;
             }
             ENDCG
         }

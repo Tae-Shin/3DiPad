@@ -116,7 +116,6 @@ public class DisplayConfig : ScriptableObject
         Shader.SetGlobalVector("_DisplayResolution", Resolution);
         Shader.SetGlobalFloat("_M", Slope);
         Shader.SetGlobalVector("_MRatio", AcrossSubpixel);
-        Shader.SetGlobalFloat("_MRatio_X", (float)AcrossSubpixel.x);
         Shader.SetGlobalInt("_StartPixel", StartPixel);
         Shader.SetGlobalInt("_PatternNum", PatternNum);
         Shader.SetGlobalFloat("_ApertureRatio", ApertureRatio);
