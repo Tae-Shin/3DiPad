@@ -63,6 +63,12 @@ public class TCP_Controller : MonoBehaviour
     public TMP_InputField Phi;
     public Slider Phi_slider;
     public Toggle Phi_Int;
+
+    [Header("K Calibration")]
+    public TMP_InputField K;
+    public Slider K_slider;
+    public Toggle K_Int;
+    
     void Start()
     {
         connectButton.onClick.AddListener(OnConnectButtonPressed);
@@ -158,6 +164,7 @@ public class TCP_Controller : MonoBehaviour
                             safe(Material.text) + "/" + (Mat_Int.isOn ? "1" : "0") + "/" +
                             safe(Origin.text) + "/" + (Ori_Int.isOn ? "1" : "0") + "/" +
                             safe(Phi.text) + "/" + (Phi_Int.isOn ? "1" : "0") + "/" +
+                            safe(K.text) + "/" + (K_Int.isOn ? "1" : "0") + "/" +
                             "\n";
                         Debug.Log("送信内容: " + message);
                         SendMessageToServer(message);
@@ -272,7 +279,9 @@ public class TCP_Controller : MonoBehaviour
                 Ori_Int.isOn = tokens[18] == "1";
                 Phi_slider.value = float.Parse(tokens[19]);
                 Phi_Int.isOn = tokens[20] == "1";
-                UI.SetActive(tokens[21] == "1");
+                K_slider.value = float.Parse(tokens[21]);
+                K_Int.isOn = tokens[22] == "1";
+                UI.SetActive(tokens[23] == "1");
             });
         }
         else

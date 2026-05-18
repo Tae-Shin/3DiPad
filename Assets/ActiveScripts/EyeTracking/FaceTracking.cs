@@ -19,6 +19,9 @@ public class FaceTracking : MonoBehaviour
     // 傾斜誤差
     public Controller Phi;
 
+    // 視差画像を構成する水平ピッチ
+    public Controller K;
+
     private void Start()
     {
         //faceManager = GameObject.Find("FaceManager").GetComponent<FaceManager>();
@@ -44,6 +47,7 @@ public class FaceTracking : MonoBehaviour
         Shader.SetGlobalFloat("_Parallax", parallax.value);
 
         Shader.SetGlobalFloat("_Phi", Phi.value);
+        Shader.SetGlobalFloat("_k", K.value);
     }
     //カメラ座標系をディスプレイ座標に変換（左下原点：単位[px]）
     Vector2 CameraToDisplay(Vector3 cameraPos)

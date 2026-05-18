@@ -8,9 +8,6 @@ Shader "Unlit/Mashitani_Rev2"
 		_Height("Height", float) = 1.0
 		_IsSBS("IsSBS", Range(0, 1)) = 1
 		_Shift("Shift", float) = 1.0
-
-        // 追加パラメータ
-        _k("k", float) = 0.25591
     }
     SubShader
     {
@@ -57,9 +54,6 @@ Shader "Unlit/Mashitani_Rev2"
 			float _Width;
 			float _Height;
             float _Shift;
-
-            // 追加パラメータ
-            float _k;
 
             v2f vert (appdata v)
             {

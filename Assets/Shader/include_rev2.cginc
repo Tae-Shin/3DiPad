@@ -39,6 +39,8 @@ float _Origin;
 // 傾斜誤差
 float _Phi;
 
+// 視差画像を構成する水平ピッチ
+float _k;
 
 //画像切替用の変数
 sampler2D _LTex;//左眼画像
