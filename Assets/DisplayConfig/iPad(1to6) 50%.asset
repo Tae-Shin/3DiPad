@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: iPad(1to6) 50%
   m_EditorClassIdentifier: 
   _origin: {x: 0, y: 0}
-  _ovd: 349.742
+  _ovd: 1420
   _designE: 63
   _experimentalE: 58
   _fixedResolution: 1

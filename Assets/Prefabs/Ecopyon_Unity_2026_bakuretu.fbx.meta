@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: afe0aad594237914ca100437475b84fe
+guid: 08d01030e9a150b4d8694acbf8f672b1
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: EcopyonHigh2_u1_v1.001
+    second: {fileID: 2100000, guid: 1d49356f9315c7a43accc34d14254e11, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

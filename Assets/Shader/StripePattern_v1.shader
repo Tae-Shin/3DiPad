@@ -95,6 +95,16 @@ Shader "Unlit/StripePattern_v1"
                 rgba.g = StripePattern(num.g, leftImage.g, rightImage.g);
                 rgba.b = StripePattern(num.b, leftImage.b, rightImage.b);
 
+                // 上端から 900px の領域は黒く塗りつぶす
+                if (int2(i.uv * _DisplayResolution).y > 1460){
+                    rgba = float4(0, 0, 0, 1);
+                }
+
+                // 下端から 400px の領域は黒く塗りつぶす
+                if (int2(i.uv * _DisplayResolution).y < 400){
+                    rgba = float4(0, 0, 0, 1);
+                }
+
                 return rgba;
             }
             ENDCG
